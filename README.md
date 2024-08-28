@@ -13,20 +13,22 @@ either as part of an admin panel, or in standalone front end forms, tables and d
 
 ### Filament v3 release
 
-This is the v3 branch, compatible with the recent Filament v3 release.  At some point soon we will replace
+This is the v3 branch, compatible with the recent Filament v3 release. At some point soon we will replace
 the main branch (currently the Filament v2 compatible branch) with this v3 branch, and move Filament v2 support to
 a v2 branch.
 
-Please report any you find either on the [GitHub Issues](https://github.com/cheesegrits/filament-google-maps/issues) page,
+Please report any you find either on the [GitHub Issues](https://github.com/cheesegrits/filament-google-maps/issues)
+page,
 or find me (@cheesegrits) on the [Filament Discord server](https://filamentphp.com/discord).
 
 ### API Usage
 
 **IMPORTANT NOTE** - some features of this package could potentially drive up your
-API bill.  If you have large tables that you display static maps on, and you clear your
-cache frequently.  Or if you allow public access to forms that use geocoding, and get hit by bots.
+API bill. If you have large tables that you display static maps on, and you clear your
+cache frequently. Or if you allow public access to forms that use geocoding, and get hit by bots.
 
-We **strongly** suggest you set [usage quotas in your Google Console](https://console.cloud.google.com/projectselector2/google/maps-apis/quotas).
+We **strongly** suggest you
+set [usage quotas in your Google Console](https://console.cloud.google.com/projectselector2/google/maps-apis/quotas).
 We are not liable if you get a surprise bill!
 
 ### TL/DR
@@ -37,7 +39,7 @@ If you just can't handle reading documentation and want to dive right in ...
 composer require cheesegrits/filament-google-maps "^3.0"
 ```
 
-... then follow these instructions to add a computed attribute to any  model(s) that will use these components (which
+... then follow these instructions to add a computed attribute to any model(s) that will use these components (which
 should already have separate lat and lng fields, even if they are empty, see the Batch Commands section) ...
 
 ```shell
@@ -65,7 +67,7 @@ use Cheesegrits\FilamentGoogleMaps\Fields\Map
 ### Map Field
 
 The **Map** field displays (unsurprisingly) a Google map, with a comprehensive set of configuration
-options.  It supports coordinate updating both ways between map and form, forward and revese geocompletion, reverse
+options. It supports coordinate updating both ways between map and form, forward and revese geocompletion, reverse
 geocoding and KML layers.
 
 ![Map Field](images/form-map.png)
@@ -79,14 +81,14 @@ with optional reverse geocoding of address components.
 
 ### Infolist Field
 
-The **MapEntry** Infolist field displays a (read only) map showing a single pin.  This is currently WIP, features
+The **MapEntry** Infolist field displays a (read only) map showing a single pin. This is currently WIP, features
 and functionality (like KML layers, GeoJSON drawings, etc) to be added soon.
 
 ![Infolist Field](images/infolist.png)
 
 ### Map Widget
 
-The **MapWidget** displays a filterable set of locations from a model, with 
+The **MapWidget** displays a filterable set of locations from a model, with
 optional clustering, templatable labels, customizable icons, etc.
 
 ![Map Widget](images/widget-maps.png)
@@ -132,11 +134,11 @@ a combination of address fields into lat lng, or reverse geocoding lat and lng t
 <!-- GETTING STARTED -->
 <a name="getting-started"></a>
 
-## Getting Started 
+## Getting Started
 
 ### Prerequisites
 
-This package is built on Filament V2, and Laravel 9.  It may run on earlier versions of
+This package is built on Filament V2, and Laravel 9. It may run on earlier versions of
 Laravel, but has not been tested.
 
 ### Installation
@@ -167,12 +169,12 @@ php artisan filament-google-maps:model-code
 ... which will prompt you for:
 
 - model: your model class, such as Places, or Dealerships/Dealership
-- lat: your latitude attribute (existing table field) 
+- lat: your latitude attribute (existing table field)
 - lng: your longitude attribute (existing table field)
 - location: the computed property name, which **should not exist** on your table
 
 The 'location' computed attribute is what you will use when you make() your map
-fields and columns.  If you have no religious preference and it doesn't already
+fields and columns. If you have no religious preference and it doesn't already
 exist on your table, just use 'location'.
 
 It will then spit out the code for you to copy and paste to your model class.
@@ -182,7 +184,7 @@ any existing content of these arrays, make sure you replace the existing ones if
 
 ### Setting your Google Maps API Key
 
-All use of the Google Maps API requires an API key.  If you don't have one, refer to
+All use of the Google Maps API requires an API key. If you don't have one, refer to
 [Google's documentation](https://developers.google.com/maps/documentation/javascript/get-api-key).
 
 Once you have a key, either add it to your .env file as:
@@ -190,24 +192,26 @@ Once you have a key, either add it to your .env file as:
 ```php
 GOOGLE_MAPS_API_KEY=your_map_key_here
 ```
-... or publish and edit the filament-google-maps.php config file.  We recommend using
-an environment variable.  Note that we deliberately use the same key name used by most Google related Laravel
-packages, just to make life easier.  However, if need to use a different key for this package, you may do so -
+
+... or publish and edit the filament-google-maps.php config file. We recommend using
+an environment variable. Note that we deliberately use the same key name used by most Google related Laravel
+packages, just to make life easier. However, if need to use a different key for this package, you may do so -
 refer to the config file in the next section.
 
 ### Publish the configuration
 
-You may optionally publish the package configuration.  The configuration comes with a set of sane defaults, so
+You may optionally publish the package configuration. The configuration comes with a set of sane defaults, so
 we suggest not publishing unless you actually need to change something ... and even then, best to do it with
 .env variables.
 
 ```sh
 php artisan vendor:publish --tag="filament-google-maps-config"
 ```
+
 ... which can then be found in ./config/filament-google-maps.php
 
-Of particular note are the config settings for your API Keys and the cache store.  By default, we will cache all API
-responses for 30 days, using your default cache driver.  For most normal usage this is sufficient, but if you expect
+Of particular note are the config settings for your API Keys and the cache store. By default, we will cache all API
+responses for 30 days, using your default cache driver. For most normal usage this is sufficient, but if you expect
 heavy usage, we suggest setting up a dedicated Redis store in your cache.php config, and specify this with the
 FILAMENT_GOOGLE_MAPS_CACHE_STORE environment variable.
 
@@ -297,6 +301,7 @@ return [
     'force-https' => env('FILAMENT_GOOGLE_MAPS_FORCE_HTTPS', false),
 ];
 ```
+
 </details>
 
 
@@ -321,13 +326,14 @@ use Cheesegrits\FilamentGoogleMaps\Fields\Map
     ...
 ]
 ```
+
 The name used for make() must be the one you set up as your model's computed location
-property.  Note that you can have multiple maps on a form, by adding a second computed
+property. Note that you can have multiple maps on a form, by adding a second computed
 property referencing a second pair of lat/lng fields.
 
 #### Full Options
 
-The full set of options is as follows.  All option methods support closures, as well as direct values.
+The full set of options is as follows. All option methods support closures, as well as direct values.
 
 ```php
 use Cheesegrits\FilamentGoogleMaps\Fields\Map
@@ -369,13 +375,14 @@ use Cheesegrits\FilamentGoogleMaps\Fields\Map
     ->geoJsonContainsField('geojson') // field to capture GeoJSON polygon(s) which contain the map marker
 
 ```
+
 The mapControls without comments are standard Google Maps controls, refer to
 the [API documentation](https://developers.google.com/maps/documentation/javascript/controls).
 
 #### Geocompletion
 
 The autocomplete('field_name') option turns the field name you give it into a Google Places geocomplete
-field, which suggests locations as you type.  Selecting a suggestion will move the marker on the 
+field, which suggests locations as you type. Selecting a suggestion will move the marker on the
 map.
 
 If you specify autocompleteReverse(), moving the map marker will update the field specified
@@ -422,14 +429,16 @@ you move the marker).
 
 #### Layers / GeoJSON
 
-There are two ways to add layers to the map.  The layers() method accepts an array of KML or GeoRSS file URLs, which
-will be added to the map using the Maps API KmlLayer() method.  Note that these URLs must be publicly accessible, as the
-KmlLayer() method requires Google servers to read and process the files, see the [KML & GeoRSS Layers](https://developers.google.com/maps/documentation/javascript/kmllayer#overview)
+There are two ways to add layers to the map. The layers() method accepts an array of KML or GeoRSS file URLs, which
+will be added to the map using the Maps API KmlLayer() method. Note that these URLs must be publicly accessible, as the
+KmlLayer() method requires Google servers to read and process the files, see
+the [KML & GeoRSS Layers](https://developers.google.com/maps/documentation/javascript/kmllayer#overview)
 documentation for details and limitations.
 
-The second method allows for a single GeoJSON file to be specified using the geoJson() method, which accepts a closure or
-string that can be a local file path, raw GeoJSON, or a URL to a GeoJSON file.  If specifying a local path, the optional
-second argument can be the name of the Storage disk to use.  The GeoJSON is rendered on the map using the Maps API
+The second method allows for a single GeoJSON file to be specified using the geoJson() method, which accepts a closure
+or
+string that can be a local file path, raw GeoJSON, or a URL to a GeoJSON file. If specifying a local path, the optional
+second argument can be the name of the Storage disk to use. The GeoJSON is rendered on the map using the Maps API
 [Data Layer](https://developers.google.com/maps/documentation/javascript/datalayer).
 
 ```php
@@ -446,9 +455,9 @@ second argument can be the name of the Storage disk to use.  The GeoJSON is rend
 ```
 
 When using GeoJSON, we provide a convenience method for storing a reference to any polygon features which contain the
-map marker coordinates, using the geoJsonContainsField() method.  The first argument to this method is the field name
-on your form (which can be a Hidden field type) in which to store the data.  The second is an optional argument
-specifying a property name from your GeoJSON features to store.  If not specified, the entire GeoJSON feature will
+map marker coordinates, using the geoJsonContainsField() method. The first argument to this method is the field name
+on your form (which can be a Hidden field type) in which to store the data. The second is an optional argument
+specifying a property name from your GeoJSON features to store. If not specified, the entire GeoJSON feature will
 be stored.
 
 ```php
@@ -484,8 +493,8 @@ EOT;
 ```
 
 With the above example, if the user dropped the map pin inside the rectangle, the 'geojson_contains' field would be
-updated as ["value0"].  If the second argument was omitted, the field would be updated with a GeoJSON FeatureCollection
-containing the JSON for the rectangle.  If you have overlapping features, and multiple polygons contain the marker,
+updated as ["value0"]. If the second argument was omitted, the field would be updated with a GeoJSON FeatureCollection
+containing the JSON for the rectangle. If you have overlapping features, and multiple polygons contain the marker,
 all features containing the marker will be included in the array / FeatureCollection.
 
 Also note the optional use of the geoJsonVisible(false) method, which hides the layer (creates a separate Data layer
@@ -529,7 +538,7 @@ If you wish to update your lat and lng fields on the form when the map marker is
 
 #### Reverse Geocode & Place Changed Callbacks
 
-To use the features in this section, you must add the InteractsWithMaps trait to your Livewire component.  If you
+To use the features in this section, you must add the InteractsWithMaps trait to your Livewire component. If you
 are using it in a Filament panel, this will typically be on the EditFoo page of your resource (or ManageFoo for a
 simple resource):
 
@@ -544,14 +553,15 @@ class EditLocation extends EditRecord
     //
 }
 ```
+
 In a standalone form context, this would be on your own component.
 
 If the built-in reverse geocode symbol mapping doesn't do what you need, you can provide a closure which will get
-called via Livewire whenever a reverse geocode occurs on the Map.  You will be passed an array with the geocode
+called via Livewire whenever a reverse geocode occurs on the Map. You will be passed an array with the geocode
 results, and can then process those how you want, and use a $set callable to set fields on your form accordingly.
 
 NOTE that reverseGeocodeUsing() can be used in combination with reverseGeocode(), so you can fill some fields
-with the simpler reverseGeocode() method, and others with reverseGeocodeUsing().  This is useful if, for example,
+with the simpler reverseGeocode() method, and others with reverseGeocodeUsing(). This is useful if, for example,
 you have counties and/or states tables and use those with Select fields with relationships, so need to handle
 counties / states differently (by looking up the corresponding address components in your tables and setting your
 form fields to the appropriate keys).
@@ -565,7 +575,7 @@ Map::make('location')
 ```
 
 Likewise, if you want to do custom processing whenever a Place is resolved on the Map, usually from a Geocomplete
-or by clicking on a place pin on the map, you can use the 
+or by clicking on a place pin on the map, you can use the
 
 ```php
 Map::make('location')
@@ -583,11 +593,11 @@ to keep your API usage to a minimum.
 
 ### Geocomplete Field
 
-The Geocomplete field turns a field on your form into a Google Geocomplete field.  You
+The Geocomplete field turns a field on your form into a Google Geocomplete field. You
 would usually use this **instead of** a Map field (if you want a geocomplete field together
 with a map, you would typically use the autocomplete() feature on the Map field).
 
-The Geocomplete field can operate in one of two modes.  Either independently, where you
+The Geocomplete field can operate in one of two modes. Either independently, where you
 simply use it with a normal text field on your form, e.g. 'full_address', and this component
 will simply fill the field in with the formatted address returned when the user selects one
 from the dropdown.
@@ -599,12 +609,13 @@ use Cheesegrits\FilamentGoogleMaps\Fields\Geocomplete
 ```
 
 The second mode is isLocation() mode, where you use it with the 'location' computed attribute field
-from your model.  In this usage, when the form is saved, the currently selected address will be geocoded to your
+from your model. In this usage, when the form is saved, the currently selected address will be geocoded to your
 lat and lng fields. When the form loads, if geocodeOnLoad() is specified, the current lat and lng will be reverse
 geocoded to a full address (using the formatted_address field from Google).
 
-**NOTE** - the geocodeOnLoad() feature requires API access from your server.  If you are using an API key which is restricted
-to HTTP Referrers, this will not work.  You will need to add another key using the FILAMENT_GOOGLE_MAPS_SERVER_API_KEY
+**NOTE** - the geocodeOnLoad() feature requires API access from your server. If you are using an API key which is
+restricted
+to HTTP Referrers, this will not work. You will need to add another key using the FILAMENT_GOOGLE_MAPS_SERVER_API_KEY
 (see Config section), which is restricted by IP address.
 
 ```php
@@ -617,18 +628,19 @@ use Cheesegrits\FilamentGoogleMaps\Fields\Geocomplete
 
 In isLocation mode the field on the form will be empty on load (as it's not a text field an address can be stored in).
 If you want this filled in, you can use geocodeOnLoad() which will do a server side API call to resolve the lat/lng to
-an address.  See the note in the config section about server side API keys.
+an address. See the note in the config section about server side API keys.
 
 In both modes, you can specify the type(s) of place to show, and the Places response field to use to fill the field.
-Refer to the Google Places API documentation for the [Place Types](https://developers.google.com/maps/documentation/places/web-service/supported_types)
-and [Place Data Fields](https://developers.google.com/maps/documentation/javascript/place-data-fields).  Pay particular
+Refer to the Google Places API documentation for
+the [Place Types](https://developers.google.com/maps/documentation/places/web-service/supported_types)
+and [Place Data Fields](https://developers.google.com/maps/documentation/javascript/place-data-fields). Pay particular
 to the limitations on the number and mix of types - either 1 from Table 3 (like 'address' or 'establishment'), or up to
 5 from tables 1 or 2 (like 'airport', 'subway_station', etc).
 
 ```php
     Geocomplete::make('location')
         ->types(['car_dealer', 'car_rental', 'car_repair'])
-        ->placesField('name')
+        ->placeField('name')
 ```
 
 In both modes, you may optionally specify fields to reverse geocode the selected address component data
@@ -656,8 +668,10 @@ provide your own closure for handling reverse geocode data, as described in the 
         ->geolocate() // add a suffix button which requests and reverse geocodes the device location
         ->geolocateIcon('heroicon-o-map'), // override the default icon for the geolocate button
 ```
+
 This field is *cost optimized*, so it will only start searching for places after 300ms of inactivity, and will not
-search while you are typing.  This is to prevent excessive API calls, as Google charges for each one. If you set the minChars
+search while you are typing. This is to prevent excessive API calls, as Google charges for each one. If you set the
+minChars
 to 0, it will start searching immediately. I suggest you set it to a minimum of 3.
 
 The Geocomplete field also offers many of the same features as Filament's TextInput,
@@ -687,8 +701,9 @@ use Cheesegrits\FilamentGoogleMaps\Infolists\MapEntry;
 
 ### Form WidgetMap Field
 
-If you need to display multiple markers in a map on a form, you can use the WidgetMap field.  This is a cut down version
-of the main MapWidget (see below), providing a read-only display of multiple markers.  You cannot move or update the markers, only
+If you need to display multiple markers in a map on a form, you can use the WidgetMap field. This is a cut down version
+of the main MapWidget (see below), providing a read-only display of multiple markers. You cannot move or update the
+markers, only
 display them.
 
 ```php
@@ -731,7 +746,7 @@ There are also center() and zoom() methods you can use to customize the initial 
 
 ### Table Column
 
-The table column displays a static Google map image.  The images are created on the
+The table column displays a static Google map image. The images are created on the
 server side through calls to the Maps API, and cached locally on the server (using
 Laravel's default cache driver) for a default of 30 days, to prevent excessive API usage.
 **See the warning at the top of this page about API usage**.
@@ -752,6 +767,7 @@ MapColumn::make('location')
     ->zoom(15) // API setting for zoom (1 through 20)
     ->ttl(60 * 60 * 24 * 30), // number of seconds to cache image before refetching from API
 ```
+
 **NOTE** that options marked as 'API Setting' are used as part of the cache key, so changing
 any of these will force a cache refresh for all images in the table (as they are displayed).
 
@@ -787,7 +803,7 @@ RadiusFilter::make('radius')
 When using Radius filtering, there is also a RadiusAction you can use, which allows you to click a button on a row
 in the table to set the address being used for the current Radius Filter.
 
-NOTE - you must name the RadiusAction the same as your RadiusFilter.  The default is 'radius'.
+NOTE - you must name the RadiusAction the same as your RadiusFilter. The default is 'radius'.
 
 ```php
 use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
@@ -803,7 +819,7 @@ use Cheesegrits\FilamentGoogleMaps\Actions\RadiusAction;
     }
 ```
 
-If your locations are in related data, you may add a relationship() method to the RadiusAction.  You may also override
+If your locations are in related data, you may add a relationship() method to the RadiusAction. You may also override
 the color and icon:
 
 ```php
@@ -877,7 +893,8 @@ and in either `getHeaderWidgets()` or `getFooterWidgets()` of any `LocationResou
 
 ```
 
-If you omit the Resource, the widget will be created in the main widget folder at /Filament/Widgets, and the command will
+If you omit the Resource, the widget will be created in the main widget folder at /Filament/Widgets, and the command
+will
 tell you what to do if you want to use it on the front end:
 
 ```shell
@@ -1016,8 +1033,8 @@ class DealershipMap extends MapWidget
 ```
 
 You can add options to the map config (the 'opts' object passed to the Google map creation in Javascript) by overriding
-the getConfig() method, and adding a ['mapConfig'] entry to the $config.  Anything you add to this will be passed
-verbatim to the map creation.  For example, to hide POI (points of interest) markers:
+the getConfig() method, and adding a ['mapConfig'] entry to the $config. Anything you add to this will be passed
+verbatim to the map creation. For example, to hide POI (points of interest) markers:
 
 ```php
     public function getConfig(): array
@@ -1045,11 +1062,11 @@ or making the map section collapsible.
 ### Map Table Widget
 
 The map table widget has all the features of the vanilla widget, but with the addition
-of a Filament table underneath it.  The map responds to all filtering and searching
+of a Filament table underneath it. The map responds to all filtering and searching
 on the table, which is done with standard Filament Table methods and schemas.
 
 To generate a Dealership table map, you would run the same Artisan command, but choose the Map & Table
-option.  The generated code will look similar to the Map option, but with the addition of the familiar
+option. The generated code will look similar to the Map option, but with the addition of the familiar
 Filament methods to define the table columns, filters, actions, etc.
 
 ```php
@@ -1109,7 +1126,7 @@ class DealershipMap extends MapTableWidget
 
 Anything you can do in normal Filament tables, you can do in this table.
 
-Also note the use of the MapIsFilter table filter.  With this optionally included in the table filters, your map acts
+Also note the use of the MapIsFilter table filter. With this optionally included in the table filters, your map acts
 as a filter for the attached table, so zooming and panning to change the visible map pins will filter the table
 accordingly.
 
@@ -1128,7 +1145,7 @@ as well.
 
 ### Helper commands
 
-It is often useful to be able to test a single geocode lookup.  We provide two commands ...
+It is often useful to be able to test a single geocode lookup. We provide two commands ...
 
 ```shell
 php artisan filament-google-maps:geocode --address="1600 Pennsylvania Avenue NW, Washington, DC 20500" -A -C -G
@@ -1147,10 +1164,10 @@ php artisan filament-google-maps:reverse-geocode --lat=38.8976633 --lng=-77.0365
 
 ``` 
 
-... where the switches are optional and control what format(s) the lat/lng are given, useful for (say) getting the array to use
-for setting a default location on a Map field.  Or, as we are doing here, finding the coordinates of an address to use
+... where the switches are optional and control what format(s) the lat/lng are given, useful for (say) getting the array
+to use
+for setting a default location on a Map field. Or, as we are doing here, finding the coordinates of an address to use
 in the reverse lookup command, so we can check the address components formats ...
-
 
 ```shell
 php artisan filament-google-maps:reverse-geocode --lat=38.8976633 --lng=-77.0365739
@@ -1182,7 +1199,7 @@ php artisan filament-google-maps:reverse-geocode --lat=38.8976633 --lng=-77.0365
 ### Batch Commands
 
 When dealing with location data, it is common to have tables which have lat and lng date
-but no address data, or vice versa.  This package provides a convenient way to process tables
+but no address data, or vice versa. This package provides a convenient way to process tables
 to either geocode or reverse geocode them to fill in the blanks.
 
 #### Batch Geocoding
@@ -1208,6 +1225,7 @@ Or you can skip the hand holding and issue it as ...
 php artisan filament-google-maps:geocode-table Location --fields=street,city,state,zip --lat=lat --lng=lng --rate-limit=100
 
 ```
+
 If any of your address data is a join relationship, like say you have a 'states' table and the 'state'
 field is a foreign key, you can specify that in dotted notation, like 'states.state_full_name', where the first part
 (states) is the **name of the relationship** on your model.
@@ -1218,7 +1236,7 @@ are empty (0, null or empty string).
 #### Batch Reverse Geocoding
 
 Reverse geocoding from the command line is a little trickier, as we have to decompose and
-map the rather complicated address format Google returns.  For this, we use a standard printf style
+map the rather complicated address format Google returns. For this, we use a standard printf style
 formatting from [Gecocoder PHP](https://github.com/geocoder-php/Geocoder#formatters).
 
 Rather than explain it all, here as an example terminal session ...
@@ -1336,6 +1354,7 @@ Command summary - you may wish to copy and save this somewhere!
 php artisan filament-google-maps:reverse-geocode Location --fields="street=%n %S" --fields="city=%L" --fields="state=%A1" --fields="zip=%z" --fields="formatted_address=%n %S, %L, %z %a1" --lat=lat --lng=lng --processed=processed --rate-limit=100
 
 ```
+
 </details>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -1359,7 +1378,8 @@ of the features provided by this package.
 - [x] Add option for which cache store to use for static maps
 - [x] Add Geocomplete field
 - [ ] Improve Geocomplete field Places Data Field handling (allow more than one to be combined)
-- [x] Add Artisan commands for geocoding / reverse geocoding tables, useful when source tables have addreeses but no coords, or vice versa
+- [x] Add Artisan commands for geocoding / reverse geocoding tables, useful when source tables have addreeses but no
+  coords, or vice versa
 - [ ] Add optional request signing of API calls
 - [x] Add locale to all API calls
 - [x] Add make-widget artisan command
@@ -1375,7 +1395,8 @@ of the features provided by this package.
 
 ## Issues
 
-If (when) you find bugs, please report them on the [issues page](https://github.com/cheesegrits/filament-google-maps/issues)
+If (when) you find bugs, please report them on
+the [issues page](https://github.com/cheesegrits/filament-google-maps/issues)
 and we'll fix them ASAP.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -1385,7 +1406,8 @@ and we'll fix them ASAP.
 
 ## Contributing
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also
+simply open an issue with the tag "enhancement".
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -1425,39 +1447,67 @@ Project Link: [https://github.com/cheesegrits/filament-google-maps](https://gith
 * [Filament PHP](https://filamentphp.com)
 * [Laravel](https://laravel.com)
 
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
 [contributors-shield]: https://img.shields.io/github/contributors/cheesegrits/filament-google-maps.svg?style=for-the-badge
+
 [contributors-url]: https://github.com/cheesegrits/filament-google-maps/graphs/contributors
+
 [forks-shield]: https://img.shields.io/github/forks/cheesegrits/filament-google-maps.svg?style=for-the-badge
+
 [forks-url]: https://github.com/cheesegrits/filament-google-maps/network/members
+
 [stars-shield]: https://img.shields.io/github/stars/cheesegrits/filament-google-maps.svg?style=for-the-badge
+
 [stars-url]: https://github.com/cheesegrits/filament-google-maps/stargazers
+
 [issues-shield]: https://img.shields.io/github/issues/cheesegrits/filament-google-maps.svg?style=for-the-badge
+
 [issues-url]: https://github.com/cheesegrits/filament-google-maps/issues
+
 [license-shield]: https://img.shields.io/github/license/cheesegrits/filament-google-maps.svg?style=for-the-badge
+
 [license-url]: https://github.com/cheesegrits/filament-google-maps/blob/master/LICENSE.txt
+
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+
 [linkedin-url]: https://linkedin.com/in/linkedin_username
+
 [product-screenshot]: images/screenshot.png
+
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+
 [Next-url]: https://nextjs.org/
+
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+
 [React-url]: https://reactjs.org/
+
 [Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
+
 [Vue-url]: https://vuejs.org/
+
 [Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+
 [Angular-url]: https://angular.io/
+
 [Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
+
 [Svelte-url]: https://svelte.dev/
+
 [Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+
 [Laravel-url]: https://laravel.com
+
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+
 [Bootstrap-url]: https://getbootstrap.com
+
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
+
 [JQuery-url]: https://jquery.com 
