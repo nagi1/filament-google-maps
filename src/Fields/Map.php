@@ -840,6 +840,7 @@ class Map extends Field
             if (empty(array_filter($state))) {
                 return $this->getDefaultLocation();
             }
+
             return $state;
         } else {
             try {
