@@ -1,5 +1,11 @@
 <a name="readme-top"></a>
 
+This is a fork from the original package by cheesegrits. The original package doesn't seem to be maintained anymore.
+This fork is a work in progress, it's primary objective is to get all the pull requests commited in a single repo. The
+original package is available at
+[cheesegrits/filament-google-maps](https://github.com/cheesegrits/filament-google-maps/).
+Thank you cheesegrits for your great work on the original package. We hope you're fine.
+
 # Filament Google Maps
 
 This package provides a comprehensive set of tools for using Google Maps within the
