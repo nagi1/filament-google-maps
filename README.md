@@ -1,10 +1,35 @@
 <a name="readme-top"></a>
 
+# Forked
 This is a fork from the original package by cheesegrits. The original package doesn't seem to be maintained anymore.
 This fork is a work in progress, it's primary objective is to get all the pull requests commited in a single repo. The
 original package is available at
 [cheesegrits/filament-google-maps](https://github.com/cheesegrits/filament-google-maps/).
-Thank you cheesegrits for your great work on the original package. We hope you're fine.
+
+**Thank you cheesegrits for your great work on the original package. We hope you're fine.**
+
+## How to use this fork
+Since this is simply a fork, you still need to use cheesegrits/filament-google-maps as the package name in your composer.json.
+To be able to use a fork in composer, you need to add the prefix "DEV-" in front of the branch you want to use. So in our case,
+you need to add "DEV-forkMain" in your composer.json file since the branch "forkMain" is the default one in this fork. I wanted to 
+use something different than "main" to avoid confusion with the original package.
+
+You will also need to add the fork as a repository in your composer.json file. Here is an example of how your composer.json file
+should look like:
+
+```json
+{
+    "require": {
+      "cheesegrits/filament-google-maps": "DEV-forkMain"
+    },
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/Heyian/filament-google-maps"
+      }
+    ]
+}
+```
 
 # Filament Google Maps
 
