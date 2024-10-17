@@ -11,7 +11,7 @@ original package is available at
 ## How to use this fork
 Since this is simply a fork, you still need to use cheesegrits/filament-google-maps as the package name in your composer.json.
 To be able to use a fork in composer, you need to add the prefix "DEV-" in front of the branch you want to use. So in our case,
-you need to add "DEV-forkMain" in your composer.json file since the branch "forkMain" is the default one in this fork. I wanted to 
+you need to add "DEV-forkMain" in your composer.json file since the branch "forkMain" is the default one in this fork. I wanted to
 use something different than "main" to avoid confusion with the original package.
 
 You will also need to add the fork as a repository in your composer.json file. Here is an example of how your composer.json file
@@ -25,7 +25,7 @@ should look like:
     "repositories": [
       {
         "type": "vcs",
-        "url": "https://github.com/Heyian/filament-google-maps"
+        "url": "https://github.com/nagi1/filament-google-maps"
       }
     ]
 }
@@ -270,15 +270,15 @@ return [
 		'server_key' => env('FILAMENT_GOOGLE_MAPS_SERVER_API_KEY', env('GOOGLE_MAPS_API_KEY')),
 	    'signing_key' => env('FILAMENT_GOOGLE_MAPS_SIGNING_KEY', null),
 	],
-	
+
 	/*
 	 | By default the browser side Google Maps API will be loaded with just the 'places' library.  If you need
 	 | additional libraries for your own custom code, just add them as a comma separated list here (or in the
-	 | appropriate env key) 
+	 | appropriate env key)
 	 */
-	
+
 	'libraries' => env('FILAMENT_GOOGLE_MAPS_ADDITIONAL_LIBRARIES', null),
-	
+
 	/*
 	 | Region and country codes.
 	 |
@@ -292,7 +292,7 @@ return [
 	 |
 	 | https://developers.google.com/maps/faq#languagesupport
 	 */
-	 
+
 	'locale' => [
 		'region' => env('FILAMENT_GOOGLE_MAPS_REGION_CODE', null),
 		'language' => env('FILAMENT_GOOGLE_MAPS_LANGUAGE_CODE', null),
@@ -323,7 +323,7 @@ return [
 		'duration' => env('FILAMENT_GOOGLE_MAPS_CACHE_DURATION_SECONDS', 60 * 60 * 24 * 30),
 		'store' => env('FILAMENT_GOOGLE_MAPS_CACHE_STORE', null),
 	]
-	
+
 	 /*
      | Force https for Google API calls, rather than matching the schema of the current request,
 	 | may be needed if your app is behind a reverse proxy.
@@ -391,7 +391,7 @@ use Cheesegrits\FilamentGoogleMaps\Fields\Map
         'state' => '%A1',
         'zip' => '%z',
     ]) // reverse geocode marker location to form fields, see notes below
-    ->debug() // prints reverse geocode format strings to the debug console 
+    ->debug() // prints reverse geocode format strings to the debug console
     ->defaultLocation([39.526610, -107.727261]) // default for new forms
     ->draggable() // allow dragging to move marker
     ->clickable(false) // allow clicking to move marker
@@ -479,7 +479,7 @@ second argument can be the name of the Storage disk to use. The GeoJSON is rende
     // ... or ...
         ->geoJson('https://my.site/jsons/MyGeoJson.geojson')
     // ... or ...
-        ->geoJson(function () { 
+        ->geoJson(function () {
             // code that builds and returns raw GeoJSON
             return $json;
         })
@@ -493,7 +493,7 @@ be stored.
 
 ```php
     Map::make('location')
-        ->geoJson(function () { 
+        ->geoJson(function () {
             return <<<EOT
 {
     "type": "FeatureCollection",
@@ -580,7 +580,7 @@ use Cheesegrits\FilamentGoogleMaps\Concerns\InteractsWithMaps;
 class EditLocation extends EditRecord
 {
     use InteractsWithMaps;
-    
+
     //
 }
 ```
@@ -971,19 +971,19 @@ class DealershipMap extends MapWidget
                  * Each element in the returned data must be an array
                  * containing a 'location' array of 'lat' and 'lng',
                  * and a 'label' string.
-                 * 
-                 * You should also aan 'id' attribute for internal use by this plugin. 
+                 *
+                 * You should also aan 'id' attribute for internal use by this plugin.
                  */
                 $data[] = [
                     'location'  => [
                         'lat' => $dealership->latitude,
                         'lng' => $dealership->longitude,
                     ],
-                    
+
                     'label' => $dealership->name,
-                    
+
                     'id' => $dealership->getKey(),
-                    
+
                     /**
                      * Optionally you can provide custom icons for the map markers,
                      * either as scalable SVG's, or PNG, which doesn't support scaling.
@@ -994,7 +994,7 @@ class DealershipMap extends MapWidget
                         'type' => 'svg',
                         'scale' => [35,35],
                     ],
-                ];               
+                ];
             }
         }
 
@@ -1019,7 +1019,7 @@ provide an icon (svg or png) ...
                         ]
                     )->render(),
                     // ...
-                ]; 
+                ];
 ```
 
 To add a clickable popup action to your markers, for example to display an Infolist with record details, you can add
@@ -1037,7 +1037,7 @@ class DealershipMap extends MapWidget
 	protected static ?string $markerAction = 'markerAction';
 
     //
-    
+
 	public function markerAction(): Action
 	{
 		return Action::make('markerAction')
@@ -1193,7 +1193,7 @@ lng: -77.0365739
 
 php artisan filament-google-maps:reverse-geocode --lat=38.8976633 --lng=-77.0365739
 
-``` 
+```
 
 ... where the switches are optional and control what format(s) the lat/lng are given, useful for (say) getting the array
 to use
@@ -1284,7 +1284,7 @@ fgm> php artisan filament-google-maps:reverse-geocode Location
 
  Name of longitude element on table (e.g. `longitude`):
  > lng
- 
+
  Optional name of field to set to 1 when record is processed (e.g. `processed`)
  > processed
 
@@ -1372,7 +1372,7 @@ and show you what all those formats translate to, enter an ID here.  If not, jus
  > formatted_address=%n %S, %L, %z %a1
 
  Field mapping (e.g. city=%L), blank line to continue:
- > 
+ >
 
  Rate limit as API calls per minute (max 300):
  > 100
@@ -1541,4 +1541,4 @@ Project Link: [https://github.com/cheesegrits/filament-google-maps](https://gith
 
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 
-[JQuery-url]: https://jquery.com 
+[JQuery-url]: https://jquery.com
