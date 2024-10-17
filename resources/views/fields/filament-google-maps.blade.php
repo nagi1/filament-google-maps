@@ -8,7 +8,7 @@
         ax-load
         ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('filament-google-maps-field', 'cheesegrits/filament-google-maps') }}"
         x-data="filamentGoogleMapsField({
-                    state: $wire.entangle('{{ $getStatePath() }}'),
+                    state: $wire.entangle('{{ $getStatePath() }}').live,
                     setStateUsing: (path, state) => {
                         return $wire.set(path, state)
                     },
@@ -60,12 +60,12 @@
         wire:ignore
     >
         @if ($isSearchBoxControlEnabled())
-            <input x-ref="pacinput" type="text" placeholder="Search Box" />
+            <input x-ref="pacinput" class="w-full text-gray-900 rounded" type="text" placeholder="Search Box" />
         @endif
 
         <div
             x-ref="map"
-            class="w-full"
+            class="flex flex-col-reverse w-full"
             style="
                 height: {{ $getHeight() }};
                 min-height: 30vh;

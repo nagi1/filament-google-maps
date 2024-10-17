@@ -74,10 +74,10 @@ class Map extends Field
     protected Closure|string $mapType = 'roadmap';
 
     protected Closure|array $drawingModes = [
-        'marker'    => true,
-        'circle'    => true,
-        'polygon'   => true,
-        'polyline'  => true,
+        'marker' => true,
+        'circle' => true,
+        'polygon' => true,
+        'polyline' => true,
         'rectangle' => true,
     ];
 
@@ -87,66 +87,66 @@ class Map extends Field
      * Main field config variables
      */
     private array $mapConfig = [
-        'autocomplete'        => false,
+        'autocomplete' => false,
         'autocompleteReverse' => false,
-        'geolocate'           => false,
-        'geolocateOnLoad'     => false,
-        'geolocateLabel'      => '',
-        'draggable'           => true,
-        'clickable'           => false,
-        'defaultLocation'     => [
+        'geolocate' => false,
+        'geolocateOnLoad' => false,
+        'geolocateLabel' => '',
+        'draggable' => true,
+        'clickable' => false,
+        'defaultLocation' => [
             'lat' => 15.3419776,
             'lng' => 44.2171392,
         ],
-        'controls'       => [],
+        'controls' => [],
         'drawingControl' => false,
-        'drawingModes'   => [
-            'marker'    => true,
-            'circle'    => true,
+        'drawingModes' => [
+            'marker' => true,
+            'circle' => true,
             'rectangle' => true,
-            'polygon'   => true,
-            'polyline'  => true,
+            'polygon' => true,
+            'polyline' => true,
         ],
-        'drawingField'         => null,
-        'statePath'            => '',
-        'layers'               => [],
-        'defaultZoom'          => 8,
+        'drawingField' => null,
+        'statePath' => '',
+        'layers' => [],
+        'defaultZoom' => 8,
         'reverseGeocodeFields' => [],
-        'debug'                => false,
-        'gmaps'                => '',
+        'debug' => false,
+        'gmaps' => '',
     ];
 
     protected Closure|array $polyOptions = [
-        'fillColor'     => '#f06eaa',
-        'strokeColor'   => '#00ff00',
+        'fillColor' => '#f06eaa',
+        'strokeColor' => '#00ff00',
         'strokeOpacity' => '0.5',
-        'strokeWeight'  => 3,
-        'fillOpacity'   => 0.45,
-        'draggable'     => true,
-        'editable'      => false,
-        'clickable'     => true,
+        'strokeWeight' => 3,
+        'fillOpacity' => 0.45,
+        'draggable' => true,
+        'editable' => false,
+        'clickable' => true,
     ];
 
     protected Closure|array $rectangleOptions = [
-        'fillColor'     => '#f06eaa',
-        'strokeColor'   => '#00ff00',
+        'fillColor' => '#f06eaa',
+        'strokeColor' => '#00ff00',
         'strokeOpacity' => '0.5',
-        'strokeWeight'  => 3,
-        'fillOpacity'   => 0.45,
-        'draggable'     => true,
-        'editable'      => false,
-        'clickable'     => true,
+        'strokeWeight' => 3,
+        'fillOpacity' => 0.45,
+        'draggable' => true,
+        'editable' => false,
+        'clickable' => true,
     ];
 
     protected Closure|array $circleOptions = [
-        'fillColor'     => '#f06eaa',
-        'strokeColor'   => '#00ff00',
+        'fillColor' => '#f06eaa',
+        'strokeColor' => '#00ff00',
         'strokeOpacity' => '0.5',
-        'strokeWeight'  => 3,
-        'fillOpacity'   => 0.45,
-        'draggable'     => true,
-        'editable'      => false,
-        'clickable'     => true,
+        'strokeWeight' => 3,
+        'fillOpacity' => 0.45,
+        'draggable' => true,
+        'editable' => false,
+        'clickable' => true,
     ];
 
     //	protected Closure|string|bool $geocodeFieldsReverse = false;
@@ -154,13 +154,13 @@ class Map extends Field
     private array $componentTree = [];
 
     public array $controls = [
-        'mapTypeControl'    => true,
-        'scaleControl'      => true,
+        'mapTypeControl' => true,
+        'scaleControl' => true,
         'streetViewControl' => true,
-        'rotateControl'     => true,
+        'rotateControl' => true,
         'fullscreenControl' => true,
-        'searchBoxControl'  => false,
-        'zoomControl'       => true,
+        'searchBoxControl' => false,
+        'zoomControl' => true,
     ];
 
     public function height(Closure|string $height): static
@@ -191,9 +191,9 @@ class Map extends Field
     public function autocomplete(Closure|string $fieldName, Closure|array $types = [], Closure|string|null $placeField = null, Closure|array $countries = []): static
     {
         $this->autocomplete = $fieldName;
-        $this->types        = $types;
-        $this->placeField   = $placeField;
-        $this->countries    = $countries;
+        $this->types = $types;
+        $this->placeField = $placeField;
+        $this->countries = $countries;
 
         return $this;
     }
@@ -270,7 +270,8 @@ class Map extends Field
 
     public function getReverseGeocode(): array
     {
-        $fields     = $this->evaluate($this->reverseGeocode);
+        $fields = $this->evaluate($this->reverseGeocode);
+
         $statePaths = [];
 
         foreach ($fields as $field => $format) {
@@ -309,7 +310,7 @@ class Map extends Field
      */
     public function geolocateOnLoad(Closure|bool $geolocateOnLoad = true, Closure|bool $always = false): static
     {
-        $this->geolocateOnLoad       = $geolocateOnLoad;
+        $this->geolocateOnLoad = $geolocateOnLoad;
         $this->geolocateOnLoadAlways = $always;
 
         return $this;
@@ -319,7 +320,7 @@ class Map extends Field
     {
         if ($this->evaluate($this->geolocateOnLoad)) {
             $always = $this->evaluate($this->geolocateOnLoadAlways);
-            $state  = parent::getState();
+            $state = parent::getState();
 
             if ($always || is_null($state)) {
                 return true;
@@ -793,38 +794,38 @@ class Map extends Field
     public function getMapConfig(): string
     {
         $config = array_merge($this->mapConfig, [
-            'autocomplete'           => $this->getAutocompleteId(),
-            'types'                  => $this->getTypes(),
-            'countries'              => $this->getCountries(),
-            'placeField'             => $this->getPlaceField(),
-            'autocompleteReverse'    => $this->getAutocompleteReverse(),
-            'geolocate'              => $this->getGeolocate(),
-            'geolocateLabel'         => $this->getGeolocateLabel(),
-            'geolocateOnLoad'        => $this->getGeolocateOnLoad(),
-            'draggable'              => $this->getDraggable(),
-            'clickable'              => $this->getClickable(),
-            'defaultLocation'        => $this->getDefaultLocation(),
-            'statePath'              => $this->getStatePath(),
-            'controls'               => $this->getMapControls(false),
-            'drawingControl'         => $this->getDrawingControl(),
+            'autocomplete' => $this->getAutocompleteId(),
+            'types' => $this->getTypes(),
+            'countries' => $this->getCountries(),
+            'placeField' => $this->getPlaceField(),
+            'autocompleteReverse' => $this->getAutocompleteReverse(),
+            'geolocate' => $this->getGeolocate(),
+            'geolocateLabel' => $this->getGeolocateLabel(),
+            'geolocateOnLoad' => $this->getGeolocateOnLoad(),
+            'draggable' => $this->getDraggable(),
+            'clickable' => $this->getClickable(),
+            'defaultLocation' => $this->getDefaultLocation(),
+            'statePath' => $this->getStatePath(),
+            'controls' => $this->getMapControls(false),
+            'drawingControl' => $this->getDrawingControl(),
             'drawingControlPosition' => $this->getDrawingControlPosition(),
-            'drawingModes'           => $this->getDrawingModes(),
-            'drawingField'           => $this->getDrawingField(),
-            'layers'                 => $this->getLayers(),
-            'reverseGeocodeFields'   => $this->getReverseGeocode(),
-            'reverseGeocodeUsing'    => $this->getReverseGeocodeUsing(),
-            'placeUpdatedUsing'      => $this->getPlaceUpdatedUsing(),
-            'defaultZoom'            => $this->getDefaultZoom(),
-            'geoJson'                => $this->getGeoJsonFile(),
-            'geoJsonField'           => $this->getGeoJsonField(),
-            'geoJsonProperty'        => $this->getGeoJsonProperty(),
-            'geoJsonVisible'         => $this->getGeoJsonVisible(),
-            'debug'                  => $this->getDebug(),
-            'gmaps'                  => MapsHelper::mapsUrl(false, $this->getDrawingControl() ? ['drawing'] : []),
-            'polyOptions'            => $this->getPolyOptions(),
-            'rectangleOptions'       => $this->getRectangeOptions(),
-            'circleOptions'          => $this->getCircleOptions(),
-            'mapType'                => $this->getMapType(),
+            'drawingModes' => $this->getDrawingModes(),
+            'drawingField' => $this->getDrawingField(),
+            'layers' => $this->getLayers(),
+            'reverseGeocodeFields' => $this->getReverseGeocode(),
+            'reverseGeocodeUsing' => $this->getReverseGeocodeUsing(),
+            'placeUpdatedUsing' => $this->getPlaceUpdatedUsing(),
+            'defaultZoom' => $this->getDefaultZoom(),
+            'geoJson' => $this->getGeoJsonFile(),
+            'geoJsonField' => $this->getGeoJsonField(),
+            'geoJsonProperty' => $this->getGeoJsonProperty(),
+            'geoJsonVisible' => $this->getGeoJsonVisible(),
+            'debug' => $this->getDebug(),
+            'gmaps' => MapsHelper::mapsUrl(false, $this->getDrawingControl() ? ['drawing'] : []),
+            'polyOptions' => $this->getPolyOptions(),
+            'rectangleOptions' => $this->getRectangeOptions(),
+            'circleOptions' => $this->getCircleOptions(),
+            'mapType' => $this->getMapType(),
         ]);
 
         //ray($config);

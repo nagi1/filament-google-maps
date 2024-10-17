@@ -145,7 +145,7 @@ export default function filamentGoogleMapsField({
     createMap: function () {
       window.filamentGoogleMapsAPILoaded = true;
 
-      if (autocompleteReverse || Object.keys(reverseGeocodeFields).length > 0) {
+      if (autocompleteReverse || Object.keys(reverseGeocodeFields ?? []).length > 0) {
         this.geocoder = new google.maps.Geocoder();
       }
 
@@ -177,11 +177,38 @@ export default function filamentGoogleMapsField({
 
       if (controls.searchBoxControl) {
         const input = pacEl;
-        const searchBox = new google.maps.places.SearchBox(input);
+        const searchBox = new google.maps.places.Autocomplete(input, controls.searchBoxAutocompleteOptions);
         this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-        searchBox.addListener("places_changed", () => {
-          input.value = "";
-          this.markerLocation = searchBox.getPlaces()[0].geometry.location;
+        searchBox.bindTo("bounds", this.map);
+        searchBox.addListener("place_changed", () => {
+            const place = searchBox.getPlace();
+
+          if (!place.geometry || !place.geometry.location) {
+            window.alert(
+              "No details available for input: '" + place.name + "'"
+            );
+            return;
+          }
+
+          this.markerLocation = place.geometry.location;
+
+          if (place.geometry.viewport) {
+            this.map.fitBounds(place.geometry.viewport);
+          } else {
+            this.map.setCenter(place.geometry.location);
+          }
+
+          if(autocomplete) {
+              setStateUsing(autocomplete, place[placeField]);
+          }
+
+          this.marker.setPosition(place.geometry.location);
+          this.markerLocation = place.geometry.location;
+          this.setCoordinates(place.geometry.location);
+          this.updateGeocodeFromAddressComponents(place.address_components);
+          if (hasPlaceUpdatedUsing) {
+            placeUpdatedUsing(place);
+          }
         });
       }
 
@@ -523,7 +550,7 @@ export default function filamentGoogleMapsField({
     },
     hasReverseGeocode: function () {
       return (
-        Object.keys(reverseGeocodeFields).length > 0 || hasReverseGeocodeUsing
+        Object.keys(reverseGeocodeFields ?? []).length > 0 || hasReverseGeocodeUsing
       );
     },
     setCoordinates: function (position) {

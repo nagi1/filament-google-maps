@@ -33,7 +33,7 @@ class FieldHelper
     public static function getFieldId(string $field, Component $component): ?string
     {
         $topComponent = self::getTopComponent($component);
-        $flatFields   = static::getFlatFields($topComponent);
+        $flatFields = static::getFlatFields($topComponent);
 
         if (array_key_exists($field, $flatFields)) {
             return $flatFields[$field]->getId();
